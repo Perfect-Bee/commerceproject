@@ -5,7 +5,7 @@ import java.util.Scanner;
 // 에디터 여백에 있는 <icon src="AllIcons.Actions.Execute"/> 아이콘을 클릭하세요.
 public class Main {
     public static void main(String[] args) {
-
+        // CommerceSystem에서 직접적으로 Category 가져와서 씀.
         CommerceSystem system = new CommerceSystem();
         system.start();
 

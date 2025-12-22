@@ -8,6 +8,7 @@ import product.Product;
 import category.Category;
 
 public class CommerceSystem {
+    // Category 가져옴 : CommerceSystem에 Category 타입 변수 category 선언
     private Category category;
 
     // 시작화면 : 입력과 반복문(출력)

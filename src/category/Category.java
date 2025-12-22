@@ -16,8 +16,8 @@ public class Category {
         products.add(new Product("AirPods Pro", 350000, "노이즈 캔슬링 무선 이어폰", 7));
     }
 
+    // getter 설정 : 외부에서 getProducts()로 products : 전자제품 꺼내쓸 수 있음
     public List<Product> getProducts() {
         return products;
     }
-
 }

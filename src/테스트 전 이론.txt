@@ -1,20 +1,16 @@
-[ 실시간 커머스 플랫폼 - 전자제품 ]
-1. Galaxy S25     | 1,200,000원 | 최신 안드로이드 스마트폰
-2. iPhone 16      | 1,350,000원 | Apple의 최신 스마트폰
-3. MacBook Pro    | 2,400,000원 | M3 칩셋이 탑재된 노트북
-4. AirPods Pro    |   350,000원 | 노이즈 캔슬링 무선 이어폰
-0. 종료           | 프로그램 종료
-0 <- // 0을 입력
+Step02 : 객체 지향 설계를 적용해 순서 제어를 클래스로 관리하기
 
-// ============== //
+`CommerceSystem` 클래스 생성하기
+    >>> src/utils/CommerceSystem.java
+    - 커머스 플랫폼의 상품을 관리하고 사용자 입력을 처리하는 클래스입니다.
+    - `Product`를 관리하는 리스트가 필드로 존재합니다.
+        >>> main에 있는거 옮기기
+        >>> class CommerceSystem {
+        >>>    List<Product> products;
+        >>> }
+    - `main` 함수에서 관리하던 입력과 반복문 로직은 이제 `start` 함수를 만들어 관리합니다.
+        >>> commerceSystem.start();으로 실행하도록 변경
 
-커머스 플랫폼을 종료합니다.
-
-List<Product> products =  new ArrayList<Product>();
->>> List<Product>에 각각의 product를 담는다.
-예)
-List<Product> : [상품명, 가격, 설명, 재고량] 묶음. 재고량은 표기 X
-|-- [Galaxy S25 | 1,200,000원 | 최신 안드로이드 스마트폰]
-|-- [IPhone 16 | 1,350,000원 | Apple의 최신 스마트폰]
-|-- [MacBook Pro | 2,400,000원 | M3 칩셋이 탑재된 노트북]
-|-- [AirPods Pro |   350,000원 | 노이즈 캔슬링 무선 이어폰]
+    - `List<Product> products` 는 `CommerceSystem` 클래스 생성자를 통해 값을 할당합니다.
+        >>> CommerceSystem system = new CommerceSystem();
+        -  `CommerceSystem` 객체를 생성하고 사용하는 `main` 함수에서 객체를 생성할 때 값을 넘겨줍니다.

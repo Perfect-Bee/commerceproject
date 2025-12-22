@@ -1,32 +1,36 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
-import utils.CommerceSystem;
 import category.Category;
+import product.Product;
+import utils.CommerceSystem;
 
-//TIP 코드를 <b>실행</b>하려면 <shortcut actionId="Run"/>을(를) 누르거나
-// 에디터 여백에 있는 <icon src="AllIcons.Actions.Execute"/> 아이콘을 클릭하세요.
 public class Main {
     public static void main(String[] args) {
-        // Category 타입의 변수 category 생성 : category로 Category 생성자 실행 가능
-        // Category.java에서 products가 채워짐
-        Category category = new Category();
+        // 상위 : Category
+        // 전자제품
+        Category electronics = new Category("전자제품");
+        electronics.addProduct(new Product("Galaxy S24", 1200000, "최신 안드로이드 스마트폰", 10));
+        electronics.addProduct(new Product("iPhone 15", 1350000, "Apple의 최신 스마트폰", 9));
+        electronics.addProduct(new Product("MacBook Pro", 2400000, "M3 칩셋 노트북", 8));
+        electronics.addProduct(new Product("AirPods Pro", 350000, "노이즈 캔슬링 이어폰", 7));
 
-        // CommerceSystem 타입의 변수 system 생성
-        // category 객체를 매개변수로 전달
-        // system으로 commerceSystem(Category 타입의 변수 category) 생성자 실행됨
-        CommerceSystem system = new CommerceSystem(category);
+        // 음료
+        Category drinks = new Category("음료");
+        drinks.addProduct(new Product("Cola", 2000, "북극곰이 좋아함", 6));
+        drinks.addProduct(new Product("게토레이", 3000, "맛있음", 5));
+
+        // 의류
+        Category clothes = new Category("의류");
+        clothes.addProduct(new Product("GUCCI", 45000, "비쌈", 4));
+        clothes.addProduct(new Product("NIKE", 60000, "브이", 3));
+
+        List<Category> categories = new ArrayList<>();
+        categories.add(electronics);
+        categories.add(drinks);
+        categories.add(clothes);
+
+        CommerceSystem system = new CommerceSystem(categories);
         system.start();
-
-        // 입력
-        Scanner scanner = new Scanner(System.in);
-        int input = scanner.nextInt();
-
-        if (input == 0) {
-            System.out.println("커머스 플랫폼을 종료합니다.");
-        } else {
-            System.out.println("선택한 번호: " + input);
-        }
-
-        scanner.close();
     }
 }

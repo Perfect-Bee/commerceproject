@@ -1,47 +1,58 @@
 package utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.text.NumberFormat;
-
-import product.Product;
 import category.Category;
+import product.Product;
+
+import java.util.List;
+import java.util.Scanner;
 
 public class CommerceSystem {
 
-    // 필드 변수 선언(이 자체로는 null 값)
-    private Category category;
-    // 필드 변수 category로 매개변수 사용(Main에서 생성자 넣음)
-    // Main.java에서 CommerceSystem system = new CommerceSystem(category); 실행 시 이게 실행됨
-    public CommerceSystem(Category category) {
-        this.category = category;
+    private List<Category> categories;
+    private Scanner scanner = new Scanner(System.in);
+
+    public CommerceSystem(List<Category> categories) {
+        this.categories = categories; // 제품 종류(상위 개념)
     }
 
-    // 시작화면 : 입력과 반복문(출력)
-    public void start(){
-        // Main에서 받아온 Category 생성자를 사용함
-        List<Product> products = category.getProducts();
+    public void start() {
+        while (true) {
+            System.out.println("\n[ 실시간 커머스 플랫폼 메인 ]");
 
-        System.out.println("[ 실시간 커머스 플랫폼 - 전자제품 ]");
-        // NumberFormat을 활용한 포맷 형식 선언
-        NumberFormat nf = NumberFormat.getInstance();
+            for (int i = 0; i < categories.size(); i++) {
+                System.out.println((i + 1) + ". " + categories.get(i).getCategoryName());
+            }
+            System.out.println("0. 종료");
 
-        for (int i = 0; i < products.size(); i++) {
-            Product p = products.get(i);
+            int input = scanner.nextInt();
 
-            // 테스트 변수에 포맷 형식 적용하여 출력(String)
-            String productPriceComma = nf.format(p.price);
+            if (input == 0) {
+                System.out.println("커머스 플랫폼을 종료합니다.");
+                break;
+            }
+            if (input < 1 || input > categories.size()) continue; // 무시
 
-            // System.out.println(i+1 + ". " + p.productName + " | " + productcomma + " | " + p.description + " | " + p.stockQuantity + " | ");
-            // printf(정수(%d). 15칸 중 왼쪽 정렬(-15)String(%s) | 10칸 중 오른쪽 정렬(10)String(%s)원 | 글자(String)
-            System.out.printf(
-                    "%d. %-15s | %10s원 | %s\n",
-                    i + 1,
-                    p.productName,
-                    productPriceComma,
-                    p.description
-            );
+            showCategory(categories.get(input - 1));
         }
-        System.out.println("0. 종료 | 프로그램 종료");
+    }
+
+    // getter로 뺴온 상위 개념 이름 : category.getCategoryName()
+    private void showCategory(Category category) {
+        System.out.println("\n[ " + category.getCategoryName() + " 카테고리 ]");
+
+        // 상위 개념 이름의 리스트를 products라 하자.(이름category.getCategoryName() 때고 내용물category.getProductsList())
+        List<Product> products = category.getProductsList();
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println((i + 1) + ". " + products.get(i).getProduct());
+        }
+        System.out.println("0. 뒤로가기");
+
+        int input = scanner.nextInt();
+
+        if (input == 0) return;
+        if (input < 1 || input > products.size()) return;
+
+        System.out.println("선택한 상품: " + products.get(input - 1).getStockQuantity());
+
     }
 }

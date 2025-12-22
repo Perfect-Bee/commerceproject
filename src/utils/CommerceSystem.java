@@ -8,14 +8,18 @@ import product.Product;
 import category.Category;
 
 public class CommerceSystem {
-    // Category 가져옴 : CommerceSystem에 Category 타입 변수 category 선언
-    // 이건 필드 변수 선언. 생성자 안 만듬
+
+    // 필드 변수 선언(이 자체로는 null 값)
     private Category category;
+    // 필드 변수 category로 매개변수 사용(Main에서 생성자 넣음)
+    // Main.java에서 CommerceSystem system = new CommerceSystem(category); 실행 시 이게 실행됨
+    public CommerceSystem(Category category) {
+        this.category = category;
+    }
 
     // 시작화면 : 입력과 반복문(출력)
     public void start(){
-        // 여기에 category에 null
-        // 생성자도 없고 new Category(), 값 주입도 안 되니까 문제 터진거.
+        // Main에서 받아온 Category 생성자를 사용함
         List<Product> products = category.getProducts();
 
         System.out.println("[ 실시간 커머스 플랫폼 - 전자제품 ]");

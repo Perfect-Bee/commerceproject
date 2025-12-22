@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class CommerceSystem {
 
-    private List<Category> categories;
-    private Scanner scanner = new Scanner(System.in);
+    private final List<Category> categories;
+    private final Scanner scanner = new Scanner(System.in);
 
     public CommerceSystem(List<Category> categories) {
         this.categories = categories; // 제품 종류(상위 개념)

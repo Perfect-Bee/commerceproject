@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Category {
 
-    private String categoryName;
-    private List<Product> products;
+    private final String categoryName;
+    private final List<Product> products;
 
     // 상위 개념, product
     public Category(String categoryName) {

@@ -1,10 +1,10 @@
 package product;
 
 public class Product {
-    private String productName;
-    private int price;
-    private String description;
-    private int stockQuantity;
+    private final String productName;
+    private final int price;
+    private final String description;
+    private final int stockQuantity;
 
     public Product(String productName, int price, String description, int stockQuantity) {
         this.productName = productName;

@@ -9,10 +9,13 @@ import category.Category;
 
 public class CommerceSystem {
     // Category 가져옴 : CommerceSystem에 Category 타입 변수 category 선언
+    // 이건 필드 변수 선언. 생성자 안 만듬
     private Category category;
 
     // 시작화면 : 입력과 반복문(출력)
     public void start(){
+        // 여기에 category에 null
+        // 생성자도 없고 new Category(), 값 주입도 안 되니까 문제 터진거.
         List<Product> products = category.getProducts();
 
         System.out.println("[ 실시간 커머스 플랫폼 - 전자제품 ]");

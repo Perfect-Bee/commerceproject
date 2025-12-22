@@ -7,6 +7,10 @@ public class Main {
     public static void main(String[] args) {
         // CommerceSystem에서 직접적으로 Category 가져와서 씀.
         CommerceSystem system = new CommerceSystem();
+
+        // 이걸 실행하려고 보니까 CommerceSystem에서 문제 찾음
+        // Catogory 생성 안 해서 가져올 것이 없고
+        // CommerceSystem에서도 없음
         system.start();
 
         // 입력

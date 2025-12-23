@@ -195,11 +195,85 @@ public class CommerceSystem {
             int input = scanner.nextInt();
 
             if (input == 0) {
-                return;
+                return;  // 메인 메뉴로 돌아가기
             }
 
             // 숫자에 맞는 기능 추가
-
+            switch (input) {
+                case 1 -> addProductByAdmin();  // 2. 상품 추가 기능 연결
+                // case 2 -> System.out.println("상품 수정");
+                // case 3 -> System.out.println("상품 삭제 기능");
+                // case 4 -> System.out.println("전체 상품 현황");
+                // default -> System.out.println("잘못된 입력입니다.");
+            }
         }
+    }
+    // 관리자모드 1번 : 상품 추가
+    private void addProductByAdmin() {
+        System.out.println("\n어느 카테고리에 상품을 추가하시겠습니까?");
+
+        for (int i = 0; i < categories.size(); i++) {
+            System.out.println((i + 1) + ". " + categories.get(i).getCategoryName());
+        }
+
+        int categoryInput = scanner.nextInt();
+        if (categoryInput < 1 || categoryInput > categories.size()) {
+            System.out.println("다시 선택해주세요(카테고리 틀림)");
+            return;
+        }
+
+        // 카테고리에 저장된 선택한 카테고리
+        Category selectedCategory = categories.get(categoryInput - 1);// 인덱스 기준으로 출력 0부터 개수-1까지
+
+        scanner.nextLine(); // 버퍼 정리
+        System.out.print("상품명을 입력해주세요: ");
+        String name = scanner.nextLine();
+
+        // 중복 방지 if문 :
+        if (duplicateName(name)) {
+            System.out.println("이미 존재하는 상품명입니다. (카테고리 중복 불가)");
+            return;
+        }
+
+        System.out.print("가격을 입력해주세요: ");
+        int price = scanner.nextInt();
+
+        scanner.nextLine();
+        System.out.print("상품 설명을 입력해주세요: ");
+        String description = scanner.nextLine();
+
+        System.out.print("재고수량을 입력해주세요: ");
+        int stock = scanner.nextInt();
+
+        Product newProduct = new Product(name, price, description, stock);
+
+        System.out.println("\n" + newProduct.getStockQuantity());
+        System.out.println("위 정보로 상품을 추가하시겠습니까?");
+        System.out.println("1. 확인    2. 취소");
+
+        int confirm = scanner.nextInt();
+        // 상품 추가
+        if (confirm == 1) {
+            selectedCategory.addProduct(newProduct);
+            System.out.println("상품이 성공적으로 추가되었습니다!");
+        } else {
+            System.out.println("상품 추가가 취소되었습니다.");
+        }
+    }
+    // 상품 수정 confirm == 2
+    // 상품 삭제 confirm == 3
+    // 전체 상품 현황 confirm = 4
+    //
+
+    // 중복 테스트
+    private boolean duplicateName(String name) {
+        for (Category category : categories) {
+            for (Product product : category.getProductsList()) {
+                if (product.getProductName().equalsIgnoreCase(name)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

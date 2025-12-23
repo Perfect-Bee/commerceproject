@@ -3,6 +3,8 @@ package utils;
 import category.Category;
 import customer.ShoppingCart;
 import product.Product;
+// 관리자
+import customer.Admin;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +14,8 @@ public class CommerceSystem {
     private final List<Category> categories;
     private final Scanner scanner = new Scanner(System.in);
     private final ShoppingCart shoppingCart;
+    private final Admin admin = new Admin();
+
 
     public CommerceSystem(List<Category> categories) {
         this.categories = categories; // 제품 종류(상위 개념)
@@ -26,18 +30,25 @@ public class CommerceSystem {
             for (int i = 0; i < categories.size(); i++) {
                 System.out.println((i + 1) + ". " + categories.get(i).getCategoryName());
             }
+
             System.out.println("0. 종료");
+            // 값을 유동성 있게 하고 싶은데, 그러면 주문관리랑 겹침.
+            System.out.println("6. 관리자 모드");
+
             if (!shoppingCart.isEmpty()){showShoppingCart();}
 
 
             int input = scanner.nextInt();
 
-            // 0. 종료 아래 : 장바구니 비어있으면 안보여주고.
-            // 뭐 있으면 출력
-
             if (input == 0) {
                 System.out.println("커머스 플랫폼을 종료합니다.");
                 break;
+            }
+
+            // 관리자 모드
+            if (input == 6) {
+                enterAdminMode();
+                continue;
             }
 
             // 장바구니 확인
@@ -144,5 +155,51 @@ public class CommerceSystem {
 
         System.out.println("주문이 완료되었습니다!");
         System.out.printf("총 금액: %,d원\n", totalPrice);
+    }
+
+    // 관리자 관련 로직
+    // 관리자 비밀번호 체크 : enterAdminMode
+    private void enterAdminMode() {
+        // 비번 실패 제한
+        int attempts = 0;
+        // 3회
+        while (attempts < 3) {
+            System.out.print("관리자 비밀번호를 입력해주세요: ");
+            String inputPassword = scanner.next();
+
+            // 비밀번호 검증
+            if (admin.authenticate(inputPassword)) {
+                System.out.println("관리자 인증 성공!");
+                adminMenu();
+                return;
+            } else {
+                attempts++;
+                System.out.println("비밀번호가 틀렸습니다. (" + attempts + "/3)");
+            }
+        }
+
+        System.out.println("비밀번호 입력 3회 실패. 메인 메뉴로 돌아갑니다.");
+    }
+
+    // 관리자 메뉴 출력
+    private void adminMenu() {
+        while (true) {
+            // 이건 for 필요 없음. 고정 매뉴:)
+            System.out.println("\n[ 관리자 모드 ]");
+            System.out.println("1. 상품 추가");
+            System.out.println("2. 상품 수정");
+            System.out.println("3. 상품 삭제");
+            System.out.println("4. 전체 상품 현황");
+            System.out.println("0. 메인으로 돌아가기");
+
+            int input = scanner.nextInt();
+
+            if (input == 0) {
+                return;
+            }
+
+            // 숫자에 맞는 기능 추가
+
+        }
     }
 }

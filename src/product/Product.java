@@ -13,6 +13,15 @@ public class Product {
         this.stockQuantity = stockQuantity;
     }
 
+    // 가격
+    public int getPrice() {
+        return price;
+    }
+    // 이름
+    public String getProductName(){
+        return productName;
+    }
+
     public String getProduct() {
         return String.format(
                 "%-15s | %,8d원 | %s",

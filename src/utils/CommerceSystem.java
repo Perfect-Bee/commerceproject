@@ -203,7 +203,7 @@ public class CommerceSystem {
                 case 1 -> addProductByAdmin();  // 2. 상품 추가 기능 연결
                 case 2 -> modifyProductByAdmin();
                 // case 3 -> deleteProductByAdmin;
-                // case 4 -> findProduct;
+                case 4 -> showProductByAdmin();
             }
         }
     }
@@ -317,7 +317,27 @@ public class CommerceSystem {
 
     }
     // 전체 상품 현황 confirm = 4
-    //
+    private void showProductByAdmin(){
+        System.out.println("\n[ 전체 상품 현황 ]");
+
+            for (Category category : categories) {
+                System.out.println("\n[ " + category.getCategoryName() + " ]");
+
+                List<Product> products = category.getProductsList();
+                
+                // 공백 확인
+                if (products.isEmpty()) {
+                    System.out.println("등록된 상품이 없습니다.");
+                    continue;
+                }
+                // 읽기
+                for (int i = 0; i < products.size(); i++) {
+                    System.out.println(
+                        (i + 1) + ". " + products.get(i).getStockQuantity()
+                    );
+                }
+            }
+        }
 
     // 중복 테스트(0,1)
     private boolean duplicateName(String name) {

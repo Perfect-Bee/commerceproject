@@ -18,6 +18,7 @@ public class CommerceSystem {
         this.shoppingCart = new ShoppingCart(); // 장바구니 생성
     }
 
+    // 메인화면
     public void start() {
         while (true) {
             System.out.println("\n[ 실시간 커머스 플랫폼 메인 ]");
@@ -59,6 +60,7 @@ public class CommerceSystem {
     }
 
     // getter로 뺴온 상위 개념 이름 : category.getCategoryName()
+    // 카테고리 + 주문내역
     private void showCategory(Category category) {
         System.out.println("\n[ " + category.getCategoryName() + " 카테고리 ]");
 
@@ -86,6 +88,11 @@ public class CommerceSystem {
         int choice = scanner.nextInt();
 
         if (choice == 1) {
+            if (selectedProduct.isOutOfStock()) {
+                System.out.println("재고가 부족하여 장바구니에 담을 수 없습니다.");
+                return;
+            }
+
             shoppingCart.addProduct(selectedProduct);
             System.out.println(selectedProduct.getProductName() + "가 장바구니에 추가되었습니다.");
         }
@@ -115,5 +122,27 @@ public class CommerceSystem {
 
         System.out.println("\n[ 총 주문 금액 ]");
         System.out.printf("%,d원\n", shoppingCart.getTotalPrice());
+        
+        // 결제란
+        System.out.println("1. 주문 확정    2. 메인으로 돌아가기");
+        int choice = scanner.nextInt();
+        
+        if (choice == 1) {
+            completeOrder();
+        }
+    }
+
+    private void completeOrder() {
+        List<Product> cartProducts = shoppingCart.getProducts();
+
+        for (Product product : cartProducts) {
+            product.decreaseStock(1); // 🔥 여기서 재고 감소
+        }
+
+        int totalPrice = shoppingCart.getTotalPrice();
+        shoppingCart.clear();
+
+        System.out.println("주문이 완료되었습니다!");
+        System.out.printf("총 금액: %,d원\n", totalPrice);
     }
 }

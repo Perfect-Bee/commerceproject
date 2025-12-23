@@ -23,7 +23,7 @@ public class Main {
         // 의류
         Category clothes = new Category("의류");
         clothes.addProduct(new Product("GUCCI", 45000, "비쌈", 4));
-        clothes.addProduct(new Product("NIKE", 60000, "브이", 3));
+        clothes.addProduct(new Product("NIKE", 60000, "브이", 0));
 
         List<Category> categories = new ArrayList<>();
         categories.add(electronics);

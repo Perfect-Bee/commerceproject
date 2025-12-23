@@ -1,9 +1,9 @@
 package product;
 
 public class Product {
-    private final String productName;
-    private final int price;
-    private final String description;
+    private String productName;
+    private int price;
+    private String description;
     private int stockQuantity;
 
     public Product(String productName, int price, String description, int stockQuantity) {
@@ -21,13 +21,23 @@ public class Product {
     public int getPrice() {
         return price;
     }
-    // 설명(이건 쓸 일이 있나)
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    // set 추가
     public String getDescription(){
         return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
     // 재고
     public int getstockQuantity(){
         return stockQuantity;
+    }
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public String getProduct() {

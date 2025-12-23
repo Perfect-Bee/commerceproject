@@ -312,6 +312,7 @@ public class CommerceSystem {
     }
 
     // 상품 삭제(delete) confirm == 3
+    // 생략 : 이거 안됨
     private void deleteProductByAdmin() {
 
     }
